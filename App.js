@@ -7,7 +7,7 @@ export default function App() {
   const [todos, setTodos] = useState([]);
 
   const handlePress = () => {
-    setTodos([...todos, { key: todo }]);
+    setTodos([{ key: todo }, ...todos]);
     setTodo('');
 
   }
@@ -24,7 +24,7 @@ export default function App() {
       <Button 
         color='green' 
         title='Add' 
-        onPress={handlePress}>Add task</Button>
+        onPress={handlePress}></Button>
       <FlatList
       data={todos}
       renderItem={({item}) => <Text>{item.key}</Text>}
