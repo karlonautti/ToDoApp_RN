@@ -12,6 +12,10 @@ export default function App() {
 
   }
 
+  const handleClear = () => {
+    setTodos([]);
+  }
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -21,14 +25,24 @@ export default function App() {
         value={todo}
         >
       </TextInput>
-      <Button 
-        color='green' 
-        title='Add' 
-        onPress={handlePress}></Button>
+      
+      <View style={styles.buttonContainer}>
+        <Button 
+          color='green' 
+          title='Add' 
+          onPress={handlePress}></Button>
+      
+        <Button 
+          color='red' 
+          title='Clear' 
+          onPress={handleClear}></Button>
+      </View>
+
       <FlatList
       data={todos}
-      renderItem={({item}) => <Text>{item.key}</Text>}
-      ListEmptyComponent={<Text>No Data</Text>}
+      renderItem={({item}) => <Text style={styles.listItem}>{item.key}</Text>}
+      ListHeaderComponent={<Text style={styles.listHeader}>Shopping List</Text>}
+      ListEmptyComponent={<Text style={styles.emptyComponent}>No Data</Text>}
       ItemSeparatorComponent={
         <View style={styles.itemSeparator}></View>}
       >
@@ -39,6 +53,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -46,6 +61,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 50,
   },
+
+  buttonContainer: {
+    flexDirection: 'row',
+  },
+
   input: {
     borderColor: 'gray',
     borderWidth: 1,
@@ -53,12 +73,29 @@ const styles = StyleSheet.create({
     width: 200,
     textAlign: 'center',
     margin: 5,
-    marginBottom: 15,
+    marginBottom: 5,
     fontSize: 16,
   },
+
   itemSeparator: {
     height: 1,
     backgroundColor: 'black',
     margin: 5,
+  },
+
+  listHeader: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+
+  listItem: {
+    textAlign: 'center',
+    fontSize: 20,
+  },
+
+  emptyComponent: {
+    textAlign: 'center',
   },
 });
